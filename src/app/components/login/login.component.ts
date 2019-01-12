@@ -1,30 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from '../service/api.service';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-  loginform: FormGroup;
-  username:string='';
-  password:string='';
-  constructor(private router: Router, private formBuilder: FormBuilder) { }
+export class LoginComponent {
+  loginForm = new FormGroup({
+    username: new FormControl(''),
+    password: new FormControl(''),
+  });
+  constructor(private router: Router, private formBuilder: FormBuilder, private service: ApiService) { }
 
   ngOnInit() {
-    this.loginform = this.formBuilder.group({
-      username: [null, Validators.required],
-      password: [null, Validators.required]
-    });
-
+    this.loginForm =  new FormGroup({
+      username: new FormControl(null, [Validators.required]),
+      password: new FormControl(null, [Validators.required])
+  });
   }
-  submit() {
-    if (this.loginform.valid) {
-      console.log(this.loginform.value);
-    } else {
-      console.log('error');
-    }
+  onSubmit() {
+    // console.log(this.loginForm.value.password);
+    this.service.postLogin(this.loginForm.value).subscribe(res => {
+
+      this.router.navigate(['/home']);
+    }, (err) => {
+      console.log(err);
+    });
   }
 }
