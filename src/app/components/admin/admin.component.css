@@ -1,0 +1,13 @@
+.btn-large {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 30px 70px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 12px;
+
+}
+.btn-large:hover {
+  background-color: RoyalBlue;
+}

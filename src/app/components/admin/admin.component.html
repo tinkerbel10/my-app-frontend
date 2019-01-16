@@ -1,3 +1,10 @@
-<p>
-  admin works!
-</p>
+<!-- <app-user></app-user> -->
+
+<div class="container">
+  <button class="btn-large" (click)="toggleUSer()"><i class="fa fa-users"></i> Users</button>
+  <button class="btn-large"><i class="fa fa-bars"></i> Request</button>
+  <button class="btn-large"><i class="fa fa-user"></i> Role</button>
+  <div class="row"  *ngIf="showUser">
+    <app-user-add></app-user-add>
+  </div>
+</div>

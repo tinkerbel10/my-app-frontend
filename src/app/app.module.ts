@@ -1,14 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { CustomerComponent } from './components/customer/customer.component';
+import { UserComponent } from './components/admin/user/user.component';
+import { UserAddComponent } from './components/admin/user/user-add/user-add.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ApiService } from '../app/components/service/api.service';
+import { AuthGuard } from '../app/components/service/auth.guard';
+import { MyInterceptor } from '../app/components/service/my-interceptor';
+
 
 @NgModule({
   declarations: [
@@ -16,21 +24,23 @@ import { CustomerComponent } from './components/customer/customer.component';
     HomeComponent,
     LoginComponent,
     AdminComponent,
-    CustomerComponent
+    CustomerComponent,
+    UserComponent,
+    UserAddComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    RouterModule.forRoot([
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent },
-      { path: 'login', component: LoginComponent },
-      { path: 'admin', component: AdminComponent }
-    ], { useHash: true })
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ApiService, AuthGuard, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: MyInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
