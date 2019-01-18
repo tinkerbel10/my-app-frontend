@@ -14,7 +14,11 @@ export class LoginComponent implements OnInit {
     password: new FormControl(''),
   });
   submitted = false;
+
   constructor(private router: Router, private formBuilder: FormBuilder, private service: ApiService) { }
+
+  public showLogin:boolean = true;
+  public showRegistration:boolean = false;
 
   ngOnInit() {
     this.loginForm =  new FormGroup({
@@ -24,12 +28,12 @@ export class LoginComponent implements OnInit {
   }
 
   get form() { return this.loginForm.controls; }
+
   onSubmit() {
     this.submitted = true;
     if (this.loginForm.invalid) {
       return;
   }
-
     // console.log(this.loginForm.value.password);
     this.service.postLogin(this.loginForm.value)
     .pipe(first())
@@ -40,5 +44,15 @@ export class LoginComponent implements OnInit {
     }, (err) => {
       console.log(err);
     });
+  }
+
+  toggleLogin() {
+    this.showLogin = true;
+    this.showRegistration = false;
+  }
+
+  toggleRegistration() {
+    this.showRegistration = true;
+    this.showLogin = false;
   }
 }

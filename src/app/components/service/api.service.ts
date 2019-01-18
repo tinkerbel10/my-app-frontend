@@ -45,6 +45,11 @@ export class ApiService {
           return user;
       }));
   }
+
+
+  postRegister(formData) {
+    return this.http.post<any>(this.rootURL+'/signup', formData);
+  }
   getProfile(){
     return this.http.get(this.rootURL + '/decode', {
       withCredentials: true  // <=========== important!

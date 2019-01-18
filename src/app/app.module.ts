@@ -16,6 +16,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { ApiService } from '../app/components/service/api.service';
 import { AuthGuard } from '../app/components/service/auth.guard';
 import { MyInterceptor } from '../app/components/service/my-interceptor';
+import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { MyInterceptor } from '../app/components/service/my-interceptor';
     CustomerComponent,
     UserComponent,
     UserAddComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
