@@ -50,3 +50,7 @@ input[type=text], input[type=password], input[type=email] {
   background-color: rgba(0,0,0,.03);
   border-bottom: 1px solid rgba(0,0,0,.125);
 }
+
+table {
+  width: 100%;
+}

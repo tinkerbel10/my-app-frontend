@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
     this.signupForm =  new FormGroup({
       username: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.required]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
       first_name: new FormControl(null, [Validators.required]),
       last_name: new FormControl(null, [Validators.required]),
   });
@@ -36,6 +36,7 @@ export class RegisterComponent implements OnInit {
   this.service.postRegister(this.signupForm.value)
   .subscribe(res => {
     // console.log(res.token);
+    this.signupForm.reset();
     this.router.navigate(['/admin/dashboard']);
   }, (err) => {
     console.log(err);

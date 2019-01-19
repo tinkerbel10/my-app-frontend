@@ -51,9 +51,14 @@ export class AuthService {
   postRegister(formData) {
     return this.http.post<any>(this.rootURL+'/signup', formData);
   }
+
   getProfile(){
     return this.http.get(this.rootURL + '/profile', {
       withCredentials: true  // <=========== important!
     });
+  }
+
+  getUsers() {
+    return this.http.get(this.rootURL + '/all');
   }
 }

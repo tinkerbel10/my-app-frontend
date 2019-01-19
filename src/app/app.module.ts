@@ -16,6 +16,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { AuthService } from '../app/components/service/auth.service';
 import { AuthGuard } from '../app/components/service/auth/auth.guard';
 import { RegisterComponent } from './components/register/register.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 
 
@@ -33,6 +34,7 @@ import { MaterialModule } from './material.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
     AppRoutingModule,
