@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 })
 
 
-export class ApiService {
+export class AuthService {
   private loggedInStatus = false;
 
   constructor(private http : HttpClient) { }
@@ -30,8 +30,9 @@ export class ApiService {
  get isLoggedIn() {
    return this.loggedInStatus;
  }
+
   postLogin(formData : Login){
-  //  return this.http.post<any>(this.rootURL+'/login', formData);
+  //  return this.http.post<any>(this.rootURL + '/login', formData);
   //  return this.http.post(this.rootURL+'/login', formData);
   return this.http.post<any>(this.rootURL+'/login', formData)
         .pipe(map(user => {
@@ -51,7 +52,7 @@ export class ApiService {
     return this.http.post<any>(this.rootURL+'/signup', formData);
   }
   getProfile(){
-    return this.http.get(this.rootURL + '/decode', {
+    return this.http.get(this.rootURL + '/profile', {
       withCredentials: true  // <=========== important!
     });
   }

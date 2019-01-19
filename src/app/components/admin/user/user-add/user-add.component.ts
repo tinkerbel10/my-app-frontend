@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { ApiService } from '../../../service/api.service';
+import { AuthService } from '../../../service/auth.service';
 @Component({
   selector: 'app-user-add',
   templateUrl: './user-add.component.html',
@@ -14,7 +14,7 @@ export class UserAddComponent implements OnInit {
     first_name: new FormControl(''),
     last_name: new FormControl(''),
   });
-  constructor( private service: ApiService) { }
+  constructor( private service: AuthService) { }
   public showUser:boolean = false;
   ngOnInit() {
     this.service.getProfile().subscribe(res => {

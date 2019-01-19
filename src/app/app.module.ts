@@ -13,10 +13,10 @@ import { CustomerComponent } from './components/customer/customer.component';
 import { UserComponent } from './components/admin/user/user.component';
 import { UserAddComponent } from './components/admin/user/user-add/user-add.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { ApiService } from '../app/components/service/api.service';
-import { AuthGuard } from '../app/components/service/auth.guard';
-import { MyInterceptor } from '../app/components/service/my-interceptor';
+import { AuthService } from '../app/components/service/auth.service';
+import { AuthGuard } from '../app/components/service/auth/auth.guard';
 import { RegisterComponent } from './components/register/register.component';
+import { MaterialModule } from './material.module';
 
 
 @NgModule({
@@ -33,16 +33,13 @@ import { RegisterComponent } from './components/register/register.component';
   ],
   imports: [
     BrowserModule,
+    MaterialModule,
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ApiService, AuthGuard, {
-    provide: HTTP_INTERCEPTORS,
-    useClass: MyInterceptor,
-    multi: true
-  }],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

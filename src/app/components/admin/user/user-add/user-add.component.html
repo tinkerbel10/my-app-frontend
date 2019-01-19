@@ -9,23 +9,23 @@
           <div class="card-header"><strong>Personal Info</strong></div>
           <form role="form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
             <div class="form-group" [ngClass]="{ 'has-error has-feedback': submitted && form.email.errors }">
-              <label>Email address</label>
+              <!-- <label>Email address</label> -->
               <input type="email"  formControlName="email" placeholder="Email address" >
             </div>
             <div class="form-group" [ngClass]="{ 'has-error has-feedback': submitted && form.username.errors }">
-              <label for="">Password</label>
+              <!-- <label for="">Password</label> -->
               <input type="password"  placeholder="Password" formControlName="password">              
             </div>
             <div class="form-group" [ngClass]="{ 'has-error has-feedback': submitted && form.username.errors }">
-              <label for="">Username</label>
+              <!-- <label for="">Username</label> -->
               <input type="text"  placeholder="Username" formControlName="username">
               </div>
               <div class="form-group" [ngClass]="{ 'has-error has-feedback': submitted && form.username.errors }">
-                <label for="">First Name</label>
+                <!-- <label for="">First Name</label> -->
                 <input type="text"  placeholder="First Name" formControlName="first_name">
               </div>
               <div class="form-group" [ngClass]="{ 'has-error has-feedback': submitted && form.username.errors }">
-                <label for="">Last Name</label>
+                <!-- <label for="">Last Name</label> -->
                 <input type="text"  placeholder="Last Name" formControlName="last_name">
                 <!-- <div *ngIf="signupForm.controls.password.errors?.required && signupForm.controls.password.touched" class="error">
                     *Required
@@ -34,6 +34,9 @@
             <span class="pull-left"><button type="submit" class="button-register">Register</button></span>
             <span class="pull-right"><button type="submit" class="button-cancel">Cancel</button></span>
           </form>
+      </div>
+      <div class="col-md-6">
+        Here
       </div>
     </div>
   </div>

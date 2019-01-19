@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from '../service/api.service';
+import { AuthService } from '../service/auth.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 @Component({
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   });
   submitted = false;
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private service: ApiService) { }
+  constructor(private router: Router, private formBuilder: FormBuilder, private service: AuthService) { }
 
   public showLogin:boolean = true;
   public showRegistration:boolean = false;
@@ -36,11 +36,9 @@ export class LoginComponent implements OnInit {
   }
     // console.log(this.loginForm.value.password);
     this.service.postLogin(this.loginForm.value)
-    .pipe(first())
     .subscribe(res => {
       // console.log(res.token);
       this.router.navigate(['/admin/dashboard']);
-      this.service.setLoggenInStatus(true);
     }, (err) => {
       console.log(err);
     });

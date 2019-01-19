@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from '../service/api.service';
+import { AuthService } from '../service/auth.service';
 
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 @Component({
@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
     last_name: new FormControl(''),
   });
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private service: ApiService) { }
+  constructor(private router: Router, private formBuilder: FormBuilder, private service: AuthService) { }
 
   ngOnInit() {
     this.signupForm =  new FormGroup({
