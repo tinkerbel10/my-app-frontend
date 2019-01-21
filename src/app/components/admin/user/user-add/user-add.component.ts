@@ -22,9 +22,10 @@ export interface PeriodicElement {
 export class UserAddComponent implements OnInit {
   showUpdate:boolean = false;
   isRegistered:boolean = false;
+  _id: string;
 
   CustomerInfoTable : PeriodicElement[] = [];
-  displayedColumns: string[] = ['username', 'last_name', 'first_name', 'email', 'id'];
+  displayedColumns: string[] = ['username', 'last_name', 'first_name', 'email', 'update', 'delete'];
   dataSource = new MatTableDataSource(this.CustomerInfoTable);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -76,11 +77,11 @@ export class UserAddComponent implements OnInit {
   }, (err) => {
     console.log(err);
   });
-
-
-  console.log(this.signupForm.value);
+  // console.log(this.signupForm.value);
   }
-  UpdateUser(id: number) {
+
+  UpdateButtonUser(id: string) {
+    this._id = id;
     this.service.getUserById(id).subscribe(res => {
       this.signupForm.setValue({
         email: res.email,
@@ -93,6 +94,18 @@ export class UserAddComponent implements OnInit {
       this.showUpdate = true;
     });
   }
+
+  UpdateUserById() {
+    console.log(123, this._id);
+  }
+  deleteUserById(id: string) {
+    this.service.deleteUserById(id)
+    .subscribe(res => {
+      this.service.getUsers()
+      console.log(res);
+    })
+  }
+
   resetForm() {
     this.signupForm.reset();
     this.showUpdate = false;

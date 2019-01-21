@@ -58,14 +58,9 @@ span.psw {
 	font-weight: bold;
   font-size: 18px;
   width: 120px;
-  margin-left: 35px;
   display: block;
   background-color:white;
   border: none;
-
-	-webkit-transition: all 0.1s linear;
-	-moz-transition: all 0.1s linear;
-	transition: all 0.1s linear;
 }
 
 .panel-login {

@@ -41,14 +41,14 @@ input[type=text], input[type=password], input[type=email] {
   width: 100%;
 }
 
-.div-container {
-  padding: 100px 400px 20px 400px;
-}
 .card-header {
   padding: 12px 20px 12px 20px;
   margin-bottom: 10px;
   background-color: rgba(0,0,0,.03);
   border-bottom: 1px solid rgba(0,0,0,.125);
+}
+input.error {
+  border: 1px solid red;
 }
 
 table {

@@ -64,4 +64,10 @@ export class AuthService {
   getUserById(id) {
     return this.http.get<any>(this.rootURL + '/' + id);
   }
+  updateUseById(id, formData) {
+    return this.http.post<any>(this.rootURL + '/' + id , formData);
+  }
+  deleteUserById(id) {
+    return this.http.delete<any>(this.rootURL + '/' + id);
+  }
 }
