@@ -6,24 +6,12 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../service/auth.service';
 
 export interface PeriodicElement {
-  // name: string;
-  // position: number;
-  // weight: number;
-  // symbol: string;
+  username: string;
+  last_name: string;
+  first_name: string;
+  email: string;
+  id: string;
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
 
 
 @Component({
@@ -32,9 +20,12 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./user-add.component.css']
 })
 export class UserAddComponent implements OnInit {
+  showUpdate:boolean = false;
+  isRegistered:boolean = false;
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  CustomerInfoTable : PeriodicElement[] = [];
+  displayedColumns: string[] = ['username', 'last_name', 'first_name', 'email', 'id'];
+  dataSource = new MatTableDataSource(this.CustomerInfoTable);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -48,13 +39,13 @@ export class UserAddComponent implements OnInit {
 
   constructor( private service: AuthService, private route: Router) { }
 
-  public showUser:boolean = false;
-
   ngOnInit() {
   
     this.dataSource.paginator = this.paginator;
     
-    this.service.getProfile().subscribe(res => {
+    this.service.getUsers().subscribe(res => {
+      this.CustomerInfoTable = res.data;
+      this.dataSource.data = this.CustomerInfoTable;
       console.log(res);
     }, (err) => {
       console.log(err);
@@ -75,10 +66,13 @@ export class UserAddComponent implements OnInit {
   }
   this.service.postRegister(this.signupForm.value)
   .subscribe(res => {
+
     // console.log(res.token);
     // this.route.navigate(['/admin/dashboard']);
+
     console.log('success');
     this.signupForm.reset();
+    this.isRegistered = true;
   }, (err) => {
     console.log(err);
   });
@@ -86,8 +80,22 @@ export class UserAddComponent implements OnInit {
 
   console.log(this.signupForm.value);
   }
+  UpdateUser(id: number) {
+    this.service.getUserById(id).subscribe(res => {
+      this.signupForm.setValue({
+        email: res.email,
+        username: res.username,
+        first_name: res.first_name,
+        last_name:res.last_name,
+        password: ''
 
-  toggleUSer() {
-    this.showUser = !this.showUser;
+      });
+      this.showUpdate = true;
+    });
   }
+  resetForm() {
+    this.signupForm.reset();
+    this.showUpdate = false;
+  }
+
 }

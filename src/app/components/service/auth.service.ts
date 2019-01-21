@@ -59,6 +59,9 @@ export class AuthService {
   }
 
   getUsers() {
-    return this.http.get(this.rootURL + '/all');
+    return this.http.get<any>(this.rootURL + '/all');
+  }
+  getUserById(id) {
+    return this.http.get<any>(this.rootURL + '/' + id);
   }
 }
