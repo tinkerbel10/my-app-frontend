@@ -5,4 +5,5 @@ export class Login {
   last_name: string;
   first_name: string;
   user_type: string;
+  role_name: String;
 }

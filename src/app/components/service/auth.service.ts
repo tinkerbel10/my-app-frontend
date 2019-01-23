@@ -68,6 +68,6 @@ export class AuthService {
     return this.http.post<any>(this.rootURL + '/' + id , formData);
   }
   deleteUserById(id) {
-    return this.http.delete<any>(this.rootURL + '/' + id);
+    return this.http.delete(this.rootURL + '/' + id);
   }
 }

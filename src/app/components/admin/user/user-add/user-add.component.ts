@@ -4,6 +4,7 @@ import { MatPaginator, MatTableDataSource } from '@angular/material';
 
 import { Router } from '@angular/router';
 import { AuthService } from '../../../service/auth.service';
+import { ApiService } from '../../../service/api.service';
 
 export interface PeriodicElement {
   username: string;
@@ -22,6 +23,7 @@ export interface PeriodicElement {
 export class UserAddComponent implements OnInit {
   showUpdate:boolean = false;
   isRegistered:boolean = false;
+  roleList = [];
   _id: string;
 
   CustomerInfoTable : PeriodicElement[] = [];
@@ -36,15 +38,16 @@ export class UserAddComponent implements OnInit {
     email: new FormControl(''),
     first_name: new FormControl(''),
     last_name: new FormControl(''),
+    role_name: new FormControl('')
   });
 
-  constructor( private service: AuthService, private route: Router) { }
+  constructor( private userService: AuthService, private route: Router, private service: ApiService) { }
 
   ngOnInit() {
   
     this.dataSource.paginator = this.paginator;
     
-    this.service.getUsers().subscribe(res => {
+    this.userService.getUsers().subscribe(res => {
       this.CustomerInfoTable = res.data;
       this.dataSource.data = this.CustomerInfoTable;
       console.log(res);
@@ -58,6 +61,12 @@ export class UserAddComponent implements OnInit {
       email: new FormControl(null, [Validators.required, Validators.email]),
       first_name: new FormControl(null, [Validators.required]),
       last_name: new FormControl(null, [Validators.required]),
+      role_name: new FormControl(null, [Validators.required])
+  });
+
+  this.service.getRoleList().subscribe(res => {
+    this.roleList = res.data;
+    console.log(2224343, res);
   });
   }
 
@@ -65,7 +74,7 @@ export class UserAddComponent implements OnInit {
     if (this.signupForm.invalid) {
       return;
   }
-  this.service.postRegister(this.signupForm.value)
+  this.userService.postRegister(this.signupForm.value)
   .subscribe(res => {
 
     // console.log(res.token);
@@ -82,7 +91,7 @@ export class UserAddComponent implements OnInit {
 
   UpdateButtonUser(id: string) {
     this._id = id;
-    this.service.getUserById(id).subscribe(res => {
+    this.userService.getUserById(id).subscribe(res => {
       this.signupForm.setValue({
         email: res.email,
         username: res.username,
@@ -99,9 +108,9 @@ export class UserAddComponent implements OnInit {
     console.log(123, this._id);
   }
   deleteUserById(id: string) {
-    this.service.deleteUserById(id)
+    this.userService.deleteUserById(id)
     .subscribe(res => {
-      this.service.getUsers()
+      this.userService.getUsers()
       console.log(res);
     })
   }
