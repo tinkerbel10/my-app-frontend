@@ -80,6 +80,7 @@ export class UserAddComponent implements OnInit {
     // this.route.navigate(['/admin/dashboard']);
 
     console.log('success');
+    this.ngOnInit();
     this.signupForm.reset();
     this.isRegistered = true;
   }, (err) => {
@@ -100,7 +101,7 @@ export class UserAddComponent implements OnInit {
         role_name: res.role_name
 
       });
-
+      this.ngOnInit();
       this.showUpdate = true;
     });
   }
@@ -114,7 +115,7 @@ export class UserAddComponent implements OnInit {
   deleteUserById(id: string) {
     this.userService.deleteUserById(id)
     .subscribe(res => {
-      this.userService.getUsers()
+      this.ngOnInit();
       console.log(res);
     })
   }

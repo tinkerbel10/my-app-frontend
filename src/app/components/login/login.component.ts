@@ -9,6 +9,7 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  showAuth:boolean = true;
   isUserValid:boolean = false;
   loginForm = new FormGroup({
     username: new FormControl(''),

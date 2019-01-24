@@ -24,15 +24,16 @@
                 <label>
                 <input type="checkbox" checked="checked" name="remember"> Remember me
                 </label>
+                <a class="pull-right" [routerLink]="['/forgot-password']">Forgot Password?</a>
+                <!-- <button type="button" class="btn btn-link pull-right">Forgot Password?</button> -->
               </div> 
               <button type="submit" class="button-login1">Login</button>
-              <button type="button" class="btn btn-link">Forgot Password?</button>
             </form>
-            <div *ngIf="isUserValid">Username or Password is incorrect!</div>
+            <div *ngIf="isUserValid" class="errors">*Username or Password is incorrect!</div>
           </div>
-            <div *ngIf="showRegistration">
-                <app-register></app-register>
-            </div>
+          <div *ngIf="showRegistration">
+            <app-register></app-register>
+          </div>
           </div>
         </div>
       </div>    
