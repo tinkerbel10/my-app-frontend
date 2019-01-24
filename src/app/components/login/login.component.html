@@ -1,28 +1,15 @@
 <div class="myDiv">
 <div class="container">
   <div class="col-md-6 col-md-offset-3">
-      <!-- <div class="panel panel-login">
-        <div class="panel-heading">
-          <div class="row">
-            <div class="col-xs-6">
-              <button class="active" (click)="toggleLogin()" >Login</button>
-            </div>
-            <div class="col-xs-6">
-              <button (click)="toggleRegistration()">Register</button>
-            </div>
-          </div>
-          <hr>
-        </div>
-      </div> -->
-      <div class="panel-heading">
-        <h3 class="panel-title pull-left"><button class="button-top" (click)="toggleLogin()" >Login</button></h3>
-        <h3 class="panel-title pull-right"><button class="button-top" (click)="toggleRegistration()">Register</button></h3>
-      </div>
-      <hr>
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-lg-12">
-            <div *ngIf="showLogin">
+    <div class="panel-heading">
+      <h3 class="panel-title pull-left"><button class="button-top" (click)="toggleLogin()" >Login</button></h3>
+      <h3 class="panel-title pull-right"><button class="button-top" (click)="toggleRegistration()">Register</button></h3>
+    </div>
+    <hr>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-lg-12">
+          <div *ngIf="showLogin">
             <form role="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
               <!-- <div class="form-group" [ngClass]="{ 'has-error has-feedback': submitted && form.username.errors }"> -->
               <div class="form-group">
@@ -41,6 +28,7 @@
               <button type="submit" class="button-login1">Login</button>
               <button type="button" class="btn btn-link">Forgot Password?</button>
             </form>
+            <div *ngIf="isUserValid">Username or Password is incorrect!</div>
           </div>
             <div *ngIf="showRegistration">
                 <app-register></app-register>

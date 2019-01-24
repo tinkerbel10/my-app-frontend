@@ -9,6 +9,7 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  isUserValid:boolean = false;
   loginForm = new FormGroup({
     username: new FormControl(''),
     password: new FormControl(''),
@@ -34,12 +35,15 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
   }
+  var loginForm = this.loginForm.value;
+
     // console.log(this.loginForm.value.password);
-    this.service.postLogin(this.loginForm.value)
+    this.service.postLogin(loginForm)
     .subscribe(res => {
       // console.log(res.token);
       this.router.navigate(['/admin/dashboard']);
     }, (err) => {
+      this.isUserValid =true;
       console.log(err);
     });
   }

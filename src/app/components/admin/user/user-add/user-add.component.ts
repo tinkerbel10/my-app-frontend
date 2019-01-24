@@ -61,12 +61,11 @@ export class UserAddComponent implements OnInit {
       email: new FormControl(null, [Validators.required, Validators.email]),
       first_name: new FormControl(null, [Validators.required]),
       last_name: new FormControl(null, [Validators.required]),
-      role_name: new FormControl(null, [Validators.required])
+      role_name: new FormControl(null)
   });
 
   this.service.getRoleList().subscribe(res => {
     this.roleList = res.data;
-    console.log(2224343, res);
   });
   }
 
@@ -97,11 +96,16 @@ export class UserAddComponent implements OnInit {
         username: res.username,
         first_name: res.first_name,
         last_name:res.last_name,
-        password: ''
+        password: '',
+        role_name: res.role_name
 
       });
+
       this.showUpdate = true;
     });
+  }
+  compareFn(c1: any, c2:any):Boolean {
+    return c1&& c2 ? c1.id === c2.id : c1 === c2
   }
 
   UpdateUserById() {
