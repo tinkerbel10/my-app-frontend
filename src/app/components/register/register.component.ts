@@ -15,10 +15,12 @@ export class RegisterComponent implements OnInit {
     password: new FormControl(''),
     email: new FormControl(''),
     first_name: new FormControl(''),
-    last_name: new FormControl(''),
+    last_name: new FormControl('')
   });
 
   constructor(private router: Router, private formBuilder: FormBuilder, private service: AuthService) { }
+
+  isRegistered:boolean = false;
 
   ngOnInit() {
     this.signupForm =  new FormGroup({
@@ -27,6 +29,8 @@ export class RegisterComponent implements OnInit {
       email: new FormControl(null, [Validators.required, Validators.email]),
       first_name: new FormControl(null, [Validators.required]),
       last_name: new FormControl(null, [Validators.required]),
+      role_name: new FormControl('Newly Registered'),
+      role_id: new FormControl('NewLy Registered')
   });
   }
   onSubmit() {
@@ -36,13 +40,12 @@ export class RegisterComponent implements OnInit {
   this.service.postRegister(this.signupForm.value)
   .subscribe(res => {
     // console.log(res.token);
+    this.isRegistered = true;
     this.signupForm.reset();
-    this.router.navigate(['/admin/dashboard']);
+    // this.router.navigate(['/admin/dashboard']);
   }, (err) => {
     console.log(err);
   });
-
-
   console.log(this.signupForm.value);
   }
 

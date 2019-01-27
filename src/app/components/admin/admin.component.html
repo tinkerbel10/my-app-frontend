@@ -15,12 +15,12 @@
         <li class=""><a href="javascript:void(0)">Service</a></li>
         <li class=""><a href="javascript:void(0)">Transaction</a></li>
         <li class=""><a href="javascript:void(0)">Service Transaction</a></li>
-        <li class=""><a href="javascript:void(0)">Role</a></li>
+        <li class=""><a href="javascript:void(0)" (click)="toggleRole()">Role</a></li>
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="javascript:void(0)"  ><span class="glyphicon glyphicon-user"></span>Profile</a></li>
-        <li><a href="javascript:void(0)"  ><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        <li><a href="javascript:void(0)" (click)="onLogoutClick()" ><span class="glyphicon glyphicon-log-out" ></span> Logout</a></li>
       </ul>
     </div>
   </div>
@@ -34,10 +34,13 @@
   <div class="row"  *ngIf="showUser">
     <app-user-add></app-user-add>
   </div>
+  <div class="row"  *ngIf="showRole">
+      <app-user-role></app-user-role>
+    </div>
   <br>
   <hr>
   <br>
-  <div class="container">
+  <!-- <div class="container">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container matColumnDef="position">
         <th mat-header-cell *matHeaderCellDef> No. </th>
@@ -63,4 +66,4 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 25]" showFirstLastButtons></mat-paginator>
-</div>
+</div> -->

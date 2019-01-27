@@ -10,7 +10,8 @@ import { map } from 'rxjs/operators';
 
 
 export class AuthService {
-  private loggedInStatus = false;
+  authToken: any;
+  user: any;
 
   constructor(private http : HttpClient) { }
 
@@ -18,19 +19,12 @@ export class AuthService {
   list: Login[];
   readonly rootURL ="http://localhost:3000/users";
 
-//   public get currentUserValue(): User {
-//     return this.currentUserSubject.value;
-// }
 
-  setLoggenInStatus(value: boolean) {
-    this.loggedInStatus = value;
-  }
-
-
- get isLoggedIn() {
-   return this.loggedInStatus;
+ logout() {
+  this.authToken = null;
+  this.user = null;
+  localStorage.clear();
  }
-
   postLogin(formData : Login){
   //  return this.http.post<any>(this.rootURL + '/login', formData);
   //  return this.http.post(this.rootURL+'/login', formData);
@@ -47,6 +41,9 @@ export class AuthService {
       }));
   }
 
+  postVerifiedEmail(id, data) {
+    return this.http.post<any>(this.rootURL + '/veriy-email/' + id, data);
+  }
 
   postRegister(formData) {
     return this.http.post<any>(this.rootURL+'/signup', formData);

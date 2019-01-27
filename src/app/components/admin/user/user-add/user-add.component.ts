@@ -5,6 +5,7 @@ import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../service/auth.service';
 import { ApiService } from '../../../service/api.service';
+import { Role } from 'src/app/components/service/role.model';
 
 export interface PeriodicElement {
   username: string;
@@ -38,7 +39,7 @@ export class UserAddComponent implements OnInit {
     email: new FormControl(''),
     first_name: new FormControl(''),
     last_name: new FormControl(''),
-    role_name: new FormControl('')
+    role: new FormControl('')
   });
 
   constructor( private userService: AuthService, private route: Router, private service: ApiService) { }
@@ -61,7 +62,7 @@ export class UserAddComponent implements OnInit {
       email: new FormControl(null, [Validators.required, Validators.email]),
       first_name: new FormControl(null, [Validators.required]),
       last_name: new FormControl(null, [Validators.required]),
-      role_name: new FormControl(null)
+      role: new FormControl(null)
   });
 
   this.service.getRoleList().subscribe(res => {
@@ -73,7 +74,18 @@ export class UserAddComponent implements OnInit {
     if (this.signupForm.invalid) {
       return;
   }
-  this.userService.postRegister(this.signupForm.value)
+  const thisValue = this.signupForm.value;
+  const formUserData = {
+    username: thisValue.username,
+    password: thisValue.password,
+    email: thisValue.email,
+    last_name: thisValue.last_name,
+    first_name: thisValue.first_name,
+    user_type: thisValue.user_type,
+    role_name: thisValue.role.name,
+    role_id: thisValue.role._id
+  }
+  this.userService.postRegister(formUserData)
   .subscribe(res => {
 
     // console.log(res.token);
@@ -97,11 +109,11 @@ export class UserAddComponent implements OnInit {
         username: res.username,
         first_name: res.first_name,
         last_name:res.last_name,
-        password: '',
-        role_name: res.role_name
+        role: res.role_name,
+        password: res.password
 
       });
-      this.ngOnInit();
+      // this.signupForm.value.role.
       this.showUpdate = true;
     });
   }

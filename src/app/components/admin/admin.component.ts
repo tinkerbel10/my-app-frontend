@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 
+import { AuthService } from '../service/auth.service';
+
 export interface PeriodicElement {
   // name: string;
   // position: number;
@@ -36,15 +38,28 @@ export class AdminComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private router: Router, private formBuilder: FormBuilder) { }
+  constructor(private router: Router, private formBuilder: FormBuilder, private service: AuthService) { }
   public showUser:boolean = false;
+  public showRole:boolean = false;
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
   }
 
-  toggleUSer() {
-    this.showUser = !this.showUser;
+  onLogoutClick() {
+  this.service.logout();
+  this.router.navigate(['/login']);
+
   }
+
+  toggleUSer() {
+    this.showUser = true;
+    this.showRole = false;
+  }
+  toggleRole() {
+    this.showRole = true;
+    this.showUser = false;
+  }
+  
 
 }

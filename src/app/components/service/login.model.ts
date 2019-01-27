@@ -1,9 +1,9 @@
 export class Login {
   username: number;
-  password: string;
-  email: string;
-  last_name: string;
-  first_name: string;
-  user_type: string;
+  password: String;
+  email: String;
+  last_name: String;
+  first_name: String;
   role_name: String;
+  role_id: String;
 }

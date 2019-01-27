@@ -1,6 +1,9 @@
 <div class="myDiv">
 <div class="container">
   <div class="col-md-6 col-md-offset-3">
+      <div class="alert alert-success" *ngIf="isEmailVerified">
+        <strong>Success!</strong> Your email is has been verified!.
+      </div>
     <div class="panel-heading">
       <h3 class="panel-title pull-left"><button class="button-top" (click)="toggleLogin()" >Login</button></h3>
       <h3 class="panel-title pull-right"><button class="button-top" (click)="toggleRegistration()">Register</button></h3>
