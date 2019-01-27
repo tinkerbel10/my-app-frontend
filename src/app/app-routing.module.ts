@@ -37,6 +37,11 @@ const routes: Routes = [
     component: ForgotPasswordComponent,
     data: { title: 'Forgot Password' }
   },
+  {
+    path: 'employee/dashboard',
+    component: CustomerComponent,
+    data: { title: 'Employee Dashboard' }
+  },
 
   { path: '**', component: PageNotFoundComponent }
 ];

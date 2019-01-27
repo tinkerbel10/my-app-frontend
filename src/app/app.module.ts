@@ -12,6 +12,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { CustomerComponent } from './components/customer/customer.component';
 import { UserComponent } from './components/admin/user/user.component';
 import { UserAddComponent } from './components/admin/user/user-add/user-add.component';
+import { UserRoleComponent } from './components/admin/user-role/user-role.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
@@ -32,6 +33,7 @@ import { MaterialModule } from './material.module';
     CustomerComponent,
     UserComponent,
     UserAddComponent,
+    UserRoleComponent,
     PageNotFoundComponent,
     RegisterComponent,
     ForgotPasswordComponent

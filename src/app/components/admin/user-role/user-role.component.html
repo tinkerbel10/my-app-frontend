@@ -1,3 +1,57 @@
-<p>
-  user-role works!
-</p>
+<div class="container">
+    <div class="row">
+      <hr>
+        <div class="col-sm-4">
+          <div class="card-header"><strong>User Role</strong></div>
+          <form role="form" [formGroup]="roleForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <input type="text"  placeholder="Name" formControlName="name" [ngClass]="{ 'error': roleForm.controls.name.errors?.required && roleForm.controls.name.touched }" />
+              <div *ngIf="roleForm.controls.name.errors?.required && roleForm.controls.name.touched" class="invalid-feedback">
+                  <div *ngIf="roleForm.controls.name.errors?.required && roleForm.controls.name.touched">Name is required</div>
+              </div>
+            </div>
+            <div class="form-group">
+                <textarea placeholder="Description"
+                formControlName="description">
+              </textarea>
+              <div *ngIf="roleForm.controls.description.errors?.required && roleForm.controls.description.touched" class="invalid-feedback">
+                    <div *ngIf="roleForm.controls.description.errors?.required && roleForm.controls.description.touched">Description is required</div>
+                </div>
+              </div>
+              <div *ngIf="isCreated">
+                <p>Role has been successfully created!</p>
+              </div>
+            <span *ngIf="!showUpdate"  class="pull-left"><button type="submit" class="button-register" >Create</button></span>
+          </form>
+          <span *ngIf="showUpdate"  class="pull-left"><button type="submit" class="button-register" (click)="UpdateUserById()">Update</button></span>
+          <span class="pull-right"><button type="submit" class="button-cancel" (click)="resetForm()">Clear</button></span>
+      </div>
+      <div class="col-sm-8">
+        <div>
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="update">
+                <th mat-header-cell *matHeaderCellDef>Update</th>
+                <td mat-cell *matCellDef="let element">
+                  <button class="btn btn-info" (click)=UpdateButtonUser(element._id)> <span class="glyphicon glyphicon-edit"> Edit</span></button> </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="delete">
+                  <th mat-header-cell *matHeaderCellDef>Delete </th>
+                  <td mat-cell *matCellDef="let element">
+                    <button class="btn btn-warning" (click)=deleteUserById(element._id)> <span class="	glyphicon glyphicon-trash"> Delete</span></button> </td>
+                </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,70 @@
+.btn-large {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 30px 70px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 12px;
+
+}
+.btn-large:hover {
+  background-color: RoyalBlue;
+}
+
+input[type=text], input[type=password], input[type=email] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+select{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.button-register {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button-cancel {
+  background-color: #FE3535;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.card-header {
+  padding: 12px 20px 12px 20px;
+  margin-bottom: 10px;
+  background-color: rgba(0,0,0,.03);
+  border-bottom: 1px solid rgba(0,0,0,.125);
+}
+input.error {
+  border: 1px solid red;
+}
+
+textarea {
+  width: 100%;
+}
+textarea.error{
+  border: 1px solid red;
+}
+table {
+  width: 100%;
+}
