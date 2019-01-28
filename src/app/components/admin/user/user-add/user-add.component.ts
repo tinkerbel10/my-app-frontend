@@ -26,6 +26,7 @@ export class UserAddComponent implements OnInit {
   isRegistered:boolean = false;
   roleList = [];
   _id: string;
+  // password: string;
 
   CustomerInfoTable : PeriodicElement[] = [];
   displayedColumns: string[] = ['username', 'last_name', 'first_name', 'email', 'update', 'delete'];
@@ -74,18 +75,7 @@ export class UserAddComponent implements OnInit {
     if (this.signupForm.invalid) {
       return;
   }
-  const thisValue = this.signupForm.value;
-  const formUserData = {
-    username: thisValue.username,
-    password: thisValue.password,
-    email: thisValue.email,
-    last_name: thisValue.last_name,
-    first_name: thisValue.first_name,
-    user_type: thisValue.user_type,
-    role_name: thisValue.role.name,
-    role_id: thisValue.role._id
-  }
-  this.userService.postRegister(formUserData)
+  this.userService.postRegister(this.getFormValue())
   .subscribe(res => {
 
     // console.log(res.token);
@@ -98,43 +88,69 @@ export class UserAddComponent implements OnInit {
   }, (err) => {
     console.log(err);
   });
-  // console.log(this.signupForm.value);
   }
 
   UpdateButtonUser(id: string) {
-    this._id = id;
     this.userService.getUserById(id).subscribe(res => {
       this.signupForm.setValue({
         email: res.email,
         username: res.username,
         first_name: res.first_name,
         last_name:res.last_name,
-        role: res.role_name,
-        password: res.password
+        role: res.role_id,
+        password: 'password'
 
       });
-      // this.signupForm.value.role.
+      this._id = id;
+      // this.signupForm.value.role.name = res.role_name;
+      // this.password =  res.password;
       this.showUpdate = true;
     });
   }
-  compareFn(c1: any, c2:any):Boolean {
+
+
+  compareFn(c1: any, c2:any):boolean {
     return c1&& c2 ? c1.id === c2.id : c1 === c2
   }
 
   UpdateUserById() {
-    console.log(123, this._id);
+    // console.log(123, this._id);
+    this.userService.updateUseById(this._id, this.getFormValue())
+    .subscribe(res => {
+      this.ngOnInit();
+    });
   }
   deleteUserById(id: string) {
     this.userService.deleteUserById(id)
     .subscribe(res => {
       this.ngOnInit();
-      console.log(res);
     })
   }
 
   resetForm() {
     this.signupForm.reset();
     this.showUpdate = false;
+  }
+
+  getFormValue() {
+    const thisValue = this.signupForm.value;
+    let role_name;
+    this.roleList.forEach(item => {
+      if(thisValue.role === item._id) {
+        role_name = item.name
+      }
+
+    })
+    return {
+      username: thisValue.username,
+      password: thisValue.password,
+      email: thisValue.email,
+      last_name: thisValue.last_name,
+      first_name: thisValue.first_name,
+      user_type: thisValue.user_type,
+      role_name: role_name,
+      role_id: thisValue.role
+    }
   }
 
 }
