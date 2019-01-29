@@ -14,6 +14,13 @@
     </div>
   </div>
   <div class="form-group">
+    <select formControlName="role" class="form-group">
+        <option [ngValue]="null" disabled>Select Category</option>
+        <option *ngFor="let item of roleList" [ngValue]="item._id">
+          {{item.name}}</option>
+      </select>
+    </div>
+  <div class="form-group">
     <!-- <label>Username</label> -->
     <input type="text"  placeholder="Username" formControlName="username" [ngClass]="{ 'error': signupForm.controls.username.errors?.required && signupForm.controls.username.touched }" />
     <div *ngIf="signupForm.controls.username.errors?.required && signupForm.controls.username.touched" class="invalid-feedback">

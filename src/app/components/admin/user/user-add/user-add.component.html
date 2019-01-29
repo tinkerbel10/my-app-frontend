@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <hr>
-      <div class="col-sm-4">
+      <div class="col-xs-12 col-sm-4">
         <div class="card-header"><strong>Personal Info</strong></div>
         <form role="form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
@@ -44,9 +44,9 @@
           <div class="form-group">
               <!-- <label>Password</label> -->
             <input type="password"  placeholder="Password" formControlName="password"/>
-            <!-- <div *ngIf="signupForm.controls.password.errors?.required && signupForm.controls.password.touched" class="invalid-feedback">
+            <div *ngIf="signupForm.controls.password.errors?.required && signupForm.controls.password.touched" class="invalid-feedback">
                 <div *ngIf="signupForm.controls.password.errors?.required && signupForm.controls.password.touched">Password is required</div>
-            </div> -->
+            </div>
           </div>
           <div *ngIf="isRegistered">
             <p>Email verification has been successfully sent to your email</p>
@@ -55,7 +55,7 @@
             <button type="submit" class="button-register" >Create</button>
           </div>
         </form>
-        <div  *ngIf="showUpdate"  class="pull-left">
+        <div *ngIf="showUpdate"  class="pull-left">
             <button type="submit" class="button-register" (click)="UpdateUserById()">Update</button>
         </div>
         <div class="pull-right">
@@ -64,7 +64,7 @@
         <!-- <span *ngIf="showUpdate"  class="pull-left"></span> -->
         <!-- <span ></span> -->
     </div>
-    <div class="col-sm-8">
+    <div class="col-xs-12 col-sm-8">
       <div>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
           <ng-container matColumnDef="username">
@@ -88,17 +88,15 @@
           </ng-container>
 
           <ng-container matColumnDef="update">
-              <th mat-header-cell *matHeaderCellDef>Update</th>
-              <td mat-cell *matCellDef="let element">
-                <button class="btn info" (click)=UpdateButtonUser(element._id)> <span class="glyphicon glyphicon-edit"></span></button> </td>
-            </ng-container>
-
-            <ng-container matColumnDef="delete">
-                <th mat-header-cell *matHeaderCellDef>Delete </th>
-                <td mat-cell *matCellDef="let element">
-                  <button class="btn danger" (click)=deleteUserById(element._id)> <span class="	glyphicon glyphicon-trash"></span></button> </td>
-              </ng-container>
-        
+            <th mat-header-cell *matHeaderCellDef>Update</th>
+            <td mat-cell *matCellDef="let element">
+              <button class="btn info" (click)=UpdateButtonUser(element._id)> <span class="glyphicon glyphicon-edit"></span></button> </td>
+          </ng-container>
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef>Delete </th>
+            <td mat-cell *matCellDef="let element">
+              <button class="btn danger" (click)=deleteUserById(element._id)> <span class="	glyphicon glyphicon-trash"></span></button> </td>
+          </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
