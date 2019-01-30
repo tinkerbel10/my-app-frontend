@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 
 import { Router } from '@angular/router';
@@ -30,7 +31,9 @@ export class UserRoleComponent implements OnInit {
   dataSource = new MatTableDataSource(this.RoleInfoTable);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private route: Router, private service: ApiService) { }
+  constructor(private route: Router,
+              private service: ApiService,
+              private toastr: ToastrService) { }
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
@@ -63,6 +66,7 @@ export class UserRoleComponent implements OnInit {
   deleteUserById(id: string) {
     this.service.postDeleteRoleById(id)
     .subscribe(res => {
+    this.toastr.success("Role Successfully Deleted", "Success");
       this.ngOnInit();
       console.log(res);
     })
@@ -70,6 +74,7 @@ export class UserRoleComponent implements OnInit {
   UpdateUserById(){
     this.service.postUpdateRoleById(this._id, this.roleForm.value)
     .subscribe(res => {
+    this.toastr.success("Role Successfully Updated", "Success");
       this.resetForm();
       // console.log('updated');
     })
@@ -82,10 +87,12 @@ export class UserRoleComponent implements OnInit {
 
   this.service.postCreateList(this.roleForm.value)
   .subscribe(res => {
+    this.toastr.success("Role Successfully Created", "Success");
     this.ngOnInit();
     this.roleForm.reset();
     this.isCreated = true;
   }, (err) => {
+    this.toastr.warning("Error in creating role", "");
     console.log(err);
   });
   }

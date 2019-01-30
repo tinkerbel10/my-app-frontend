@@ -3,6 +3,7 @@ import { Router, ActivatedRoute  } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,7 +19,11 @@ export class LoginComponent implements OnInit {
   });
   submitted = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private service: AuthService) { }
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private formBuilder: FormBuilder,
+              private service: AuthService,
+              private toastr: ToastrService) { }
 
   public showLogin:boolean = true;
   public showRegistration:boolean = false;
@@ -26,8 +31,6 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     const is_verifiedParam: string = this.route.snapshot.queryParamMap.get('is_verified');
     const user_id: string = this.route.snapshot.queryParamMap.get('id');
-    // console.log(1243, is_verifiedParam);
-    // console.log(1243, use_id);
     if(is_verifiedParam && user_id) {
       this.service.postVerifiedEmail(user_id, {
         is_verified: true
@@ -51,25 +54,24 @@ export class LoginComponent implements OnInit {
   }
   var loginForm = this.loginForm.value;
 
-    // console.log(this.loginForm.value.password);
     this.service.postLogin(loginForm)
     .subscribe(res => {
       if(res.role === 'admin') {
         this.router.navigate(['/admin/dashboard']);
+      // this.toastr.success("Success", "");
+
       } else if(res.role === 'employee') {
         this.router.navigate(['/employee/dashboard']);
       } else {
-        console.log('Either admin or employee only')
+        this.toastr.warning("Invalid User type!", "Warning");
+        // console.log('Either admin or employee only')
       }
-      // console.log(res.token);
 
     }, (err) => {
-      this.isUserValid =true;
+      this.toastr.warning("Invalid Username or password", "");
+      // this.isUserValid =true;
       console.log(err);
     });
-  }
-
-  toggleLogin() {
     this.showLogin = true;
     this.showRegistration = false;
   }

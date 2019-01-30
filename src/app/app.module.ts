@@ -20,8 +20,10 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { AuthService } from '../app/components/service/auth.service';
 import { AuthGuard } from '../app/components/service/auth/auth.guard';
 import { RegisterComponent } from './components/register/register.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -41,6 +43,7 @@ import { MaterialModule } from './material.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     MaterialModule,
     FormsModule,
     AppRoutingModule,

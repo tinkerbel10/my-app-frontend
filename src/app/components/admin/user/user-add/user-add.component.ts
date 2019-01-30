@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { ToastrService } from 'ngx-toastr';
 
 import { Router } from '@angular/router';
 import { AuthService } from '../../../service/auth.service';
@@ -43,7 +44,10 @@ export class UserAddComponent implements OnInit {
     role: new FormControl('')
   });
 
-  constructor( private userService: AuthService, private route: Router, private service: ApiService) { }
+  constructor(private userService: AuthService,
+              private route: Router,
+              private service: ApiService,
+              private toastr: ToastrService) { }
 
   ngOnInit() {
   
@@ -77,14 +81,13 @@ export class UserAddComponent implements OnInit {
   }
   this.userService.postRegister(this.getFormValue())
   .subscribe(res => {
+    this.toastr.success("Role Successfully created", "Success");
+    this.toastr.success("Email verification has been sent!", "Success");
 
-    // console.log(res.token);
-    // this.route.navigate(['/admin/dashboard']);
-
-    console.log('success');
+    // console.log('success');
     this.ngOnInit();
     this.signupForm.reset();
-    this.isRegistered = true;
+    // this.isRegistered = true;
   }, (err) => {
     console.log(err);
   });
@@ -117,12 +120,14 @@ export class UserAddComponent implements OnInit {
     // console.log(123, this._id);
     this.userService.updateUseById(this._id, this.getFormValue())
     .subscribe(res => {
+    this.toastr.success("Role Successfully updated", "Success");
       this.ngOnInit();
     });
   }
   deleteUserById(id: string) {
     this.userService.deleteUserById(id)
     .subscribe(res => {
+    this.toastr.success("Role Successfully Deleted", "Success");
       this.ngOnInit();
     })
   }
