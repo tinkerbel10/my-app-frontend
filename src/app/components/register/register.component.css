@@ -13,6 +13,9 @@ select{
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
+  border-radius: 0px;
+  -webkit-appearance: none;
+    -webkit-border-radius: 0px;
 }
 
 .button-login1{
