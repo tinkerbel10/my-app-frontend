@@ -43,7 +43,11 @@ import { ToastrModule } from 'ngx-toastr';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,
+    }),
     MaterialModule,
     FormsModule,
     AppRoutingModule,

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute  } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
@@ -35,7 +34,6 @@ export class LoginComponent implements OnInit {
       this.service.postVerifiedEmail(user_id, {
         is_verified: true
       }).subscribe(res => {
-        // console.log(res);
         this.isEmailVerified = true
       })
     }
@@ -45,39 +43,40 @@ export class LoginComponent implements OnInit {
   });
   }
 
-  get form() { return this.loginForm.controls; }
-
   onSubmit() {
     this.submitted = true;
     if (this.loginForm.invalid) {
       return;
   }
-  var loginForm = this.loginForm.value;
-
+  const loginForm = this.loginForm.value;
     this.service.postLogin(loginForm)
     .subscribe(res => {
       if(res.role === 'admin') {
         this.router.navigate(['/admin/dashboard']);
-      // this.toastr.success("Success", "");
-
       } else if(res.role === 'employee') {
         this.router.navigate(['/employee/dashboard']);
       } else {
         this.toastr.warning("Invalid User type!", "Warning");
-        // console.log('Either admin or employee only')
       }
-
     }, (err) => {
-      this.toastr.warning("Invalid Username or password", "");
-      // this.isUserValid =true;
-      console.log(err);
+      this.toastr.error("Invalid Username or password", "");
     });
     this.showLogin = true;
     this.showRegistration = false;
   }
 
+  toggleLogin() {
+    this.isShowLogin(true);
+  }
+
   toggleRegistration() {
-    this.showRegistration = true;
-    this.showLogin = false;
+    this.isShowLogin(false);
+  }
+
+  get form() { return this.loginForm.controls; }
+
+  isShowLogin(value: boolean) {
+    this.showLogin = value;
+    this.showRegistration = !value;
   }
 }
