@@ -12,9 +12,9 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class=""><a href="javascript:void(0)" (click)="toggleUSer()">User</a></li>
-        <li class=""><a href="javascript:void(0)">Service</a></li>
+        <li class=""><a href="javascript:void(0)" >Service</a></li>
         <li class=""><a href="javascript:void(0)">Transaction</a></li>
-        <li class=""><a href="javascript:void(0)">Service Transaction</a></li>
+        <li class=""><a href="javascript:void(0)" (click)="toggleServiceTransaction()">Service Transaction</a></li>
         <li class=""><a href="javascript:void(0)" (click)="toggleRole()">Role</a></li>
 
       </ul>
@@ -25,12 +25,7 @@
     </div>
   </div>
 </nav>
-<!-- <app-user></app-user> -->
-
 <div class="container">
-  <!-- <button class="btn-large" (click)="toggleUSer()"><i class="fa fa-users"></i> Users</button>
-  <button class="btn-large"><i class="fa fa-bars"></i> Request</button>
-  <button class="btn-large"><i class="fa fa-user"></i> Role</button> -->
   <div class="row"  *ngIf="showUser">
     <app-user-add></app-user-add>
   </div>
@@ -40,7 +35,7 @@
   <br>
   <hr>
   <br>
-  <!-- <div class="container">
+  <div class="container" *ngIf="showUserServiceTransaction">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container matColumnDef="position">
         <th mat-header-cell *matHeaderCellDef> No. </th>
@@ -66,4 +61,4 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 25]" showFirstLastButtons></mat-paginator>
-</div> -->
+</div>

@@ -41,6 +41,7 @@ export class AdminComponent implements OnInit {
   constructor(private router: Router, private formBuilder: FormBuilder, private service: AuthService) { }
   public showUser:boolean = false;
   public showRole:boolean = false;
+  public showUserServiceTransaction: boolean = true;
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
@@ -55,11 +56,19 @@ export class AdminComponent implements OnInit {
   toggleUSer() {
     this.showUser = true;
     this.showRole = false;
+    this.showUserServiceTransaction = false;
+
   }
   toggleRole() {
     this.showRole = true;
     this.showUser = false;
+    this.showUserServiceTransaction = false;
   }
-  
+  toggleServiceTransaction() {
+    this.showUserServiceTransaction = true;
+    this.showRole = false;
+    this.showUser = false;
+
+  }
 
 }
